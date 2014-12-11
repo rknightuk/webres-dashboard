@@ -1,0 +1,8 @@
+{
+	"name": "webres",
+	"author": "Robb Lewis",
+	"version": "1.0.0",
+	"dependencies": {
+		"mows": "0.0.6"
+	}
+}
