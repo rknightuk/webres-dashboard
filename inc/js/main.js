@@ -24,6 +24,51 @@ $(function() {
 		block.find('.x-url').text(sub.url);
 		$('.mqtt-messages').append(block);
 	});
+
+	// GoSquared data
+	
+	$.getJSON( "inc/js/gs.json", function(data) {
+		visitors = data.visitors;
+		max = data.summary.max;
+		avg = data.summary.avg;
+		avg = avg.toFixed(2);
+		active = data.active;
+		meta = active + ' active \navg: ' + avg + ' max: ' + max;
+
+		$('#stats-current').text(visitors);
+		$('#stats-high').text(max);
+		$('#stats-average').text(avg);
+	});
+
+	// MacStories RSS
+	
+	$(function(){
+	url = 'http://www.macstories.net/feed/';
+	$.ajax({
+		type: "GET",
+		url: document.location.protocol + '//ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=1000&callback=?&q=' + encodeURIComponent(url),
+		dataType: 'json',
+		error: function(){
+		    alert('Unable to load feed, Incorrect path or invalid feed');
+		},
+		success: function(xml){
+		    values = xml.responseData.feed.entries;
+		    for (var i = 5; i >= 0; i--) {
+		    	post = values[i];
+		    	title = post.title;
+		    	date = post.publishedDate.substr(0, 16);
+		    	link = post.link;
+		    	
+		    	sub = $($('#sub-template').text());
+		    	sub.attr('href', link);
+		    	sub.find('.x-title').html(title);
+		    	sub.find('.x-time').text(date);
+		    	$('#rss-items').append(sub);
+		    };
+		}
+	});
+	});
+
 });
 
 var mows = require('mows')
