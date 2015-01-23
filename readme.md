@@ -1,5 +1,7 @@
 ## MQTT Dashboard
 
+Concept dashboard built for [Web Research Unit](https://register.port.ac.uk/apex/f?p=111:3:0::NO::P3_UNIT_ID:372560172)
+
 ### Usage
 
 1. Clone the repoistory
